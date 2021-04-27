@@ -10,6 +10,8 @@ AddEventHandler('kvl-maden:washstones', function()
             xPlayer.addInventoryItem('washedstones', 1)
             Citizen.Wait(5)
             xPlayer.removeInventoryItem('stones', 5)
+        else
+            TriggerClientEvent('esx:showNotification', src, 'Envanterinde yeterli alan yok!')
         end
     end
 end)
