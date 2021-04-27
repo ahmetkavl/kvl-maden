@@ -32,29 +32,54 @@ AddEventHandler("kvl-maden:mixingstones", function()
     local src = source
     local xPlayer = ESX.GetPlayerFromId(src)
     local removecount = KVL.RemoveWashedStoneCount
+    local diacount = math.random(KVL.GiveMinDiamondCount, KVL.GiveMaxDiamondCount)
+    local goldcount = math.random(KVL.GiveMinGoldCount, KVL.GiveMaxGoldCount)
+    local ironcount = math.random(KVL.GiveMinIronCount, KVL.GiveMaxIronCount)
+    local coppercount = math.random(KVL.GiveMinCopperCount, KVL.GiveMaxCopperCount)
+    local coalcount = math.random(KVL.GiveMinCoalCount, KVL.GiveMaxCoalCount)
     local myluck = math.random(1, 100)
 
     if xPlayer.getInventoryItem('washedstones').count > 9 then
         -- Elmas
         if myluck > 1 and myluck < 5 then
-            xPlayer.addInventoryItem('diamond', math.random(KVL.GiveMinDiamondCount, KVL.GiveMaxDiamondCount))
-            xPlayer.removeInventoryItem('washedstones', removecount)
+            if xPlayer.canCarryItem('diamond', diacount) then 
+             xPlayer.addInventoryItem('diamond', diacount)
+             xPlayer.removeInventoryItem('washedstones', removecount)
+            else
+                TriggerClientEvent('esx:showNotification', src, 'Envanterinde yeterli alan yok!')
+            end
         -- Altın
         elseif myluck > 6 and myluck < 30 then
-            xPlayer.addInventoryItem('gold', math.random(KVL.GiveMinGoldCount, KVL.GiveMaxGoldCount))
+            if xPlayer.canCarryItem('diamond', goldcount) then 
+            xPlayer.addInventoryItem('gold', goldcount)
             xPlayer.removeInventoryItem('washedstones', removecount)
+            else
+            TriggerClientEvent('esx:showNotification', src, 'Envanterinde yeterli alan yok!')
+            end
         -- Demir
         elseif myluck > 31 and myluck < 50 then
-            xPlayer.addInventoryItem('iron', math.random(KVL.GiveMinIronCount, KVL.GiveMaxIronCount))
+            if xPlayer.canCarryItem('iron', ironcount) then
+            xPlayer.addInventoryItem('iron', ironcount)
             xPlayer.removeInventoryItem('washedstones', removecount)
+            else
+            TriggerClientEvent('esx:showNotification', src, 'Envanterinde yeterli alan yok!')
+        end
         -- Bakır
         elseif myluck > 51 and myluck < 80 then
-            xPlayer.addInventoryItem('copper', math.random(KVL.GiveMinCopperCount, KVL.GiveMaxCopperCount))
+            if xPlayer.canCarryItem('copper', coppercount) then
+            xPlayer.addInventoryItem('copper', coppercount)
             xPlayer.removeInventoryItem('washedstones', removecount)
+            else
+            TriggerClientEvent('esx:showNotification', src, 'Envanterinde yeterli alan yok!')
+            end
         -- Kömür
         elseif myluck > 81 and myluck < 100 then
-            xPlayer.addInventoryItem('coal', math.random(KVL.GiveMinCoalCount, KVL.GiveMaxCoalCount))
+            if xPlayer.canCarryItem('coal', coalcount) then
+            xPlayer.addInventoryItem('coal', coalcount)
             xPlayer.removeInventoryItem('washedstones', removecount)
+            else
+                TriggerClientEvent('esx:showNotification', src, 'Envanterinde yeterli alan yok!')
+            end
         end
     end
 end)
