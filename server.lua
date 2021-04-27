@@ -6,8 +6,8 @@ AddEventHandler('kvl-maden:washstones', function()
     local src = source
     local xPlayer = ESX.GetPlayerFromId(src)
     if xPlayer.getInventoryItem('stones').count >= 5 then
-        if xPlayer.canCarryItem('washed_stones', 1) then
-            xPlayer.addInventoryItem('washed_stones', 1)
+        if xPlayer.canCarryItem('washedstones', 1) then
+            xPlayer.addInventoryItem('washedstones', 1)
             Citizen.Wait(5)
             xPlayer.removeInventoryItem('stones', 5)
         end
